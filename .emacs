@@ -1,0 +1,58 @@
+(setq default-directory "~/")
+(setq inhibit-startup-message t)
+
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+
+(setq backup-inhibited t)
+(setq auto-save-default nil)
+
+(global-auto-revert-mode)
+
+(setq mac-option-modifier 'super)
+(setq mac-command-modifier 'meta)
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default sentence-end-double-space nil)
+(setq-default show-trailing-whitespace t)
+
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+(require 'color-theme)
+;(color-theme-initialize)
+(color-theme-solarized-dark)
+;(color-theme-high-contrast)
+
+;(setq theme-default 'color-theme-euphoria)
+
+
+(set-face-attribute 'default nil :height 100)
+
+
+(require 'uniquify)
+(setq-default uniquify-buffer-name-style 'forward)
+
+
+;;texing
+(defun ctex ()
+  (interactive)
+  (let* ((texfn (buffer-name))
+	 (pdffn (substring texfn 0 (- (length texfn) 4))))
+    (save-buffer)
+    (shell-command
+     (concat "pdflatex " texfn "&& open -a Preview " pdffn ".pdf&"))))
+
+(global-set-key "\C-xt" 'ctex)
+
+
+(defun unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
