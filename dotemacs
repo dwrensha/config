@@ -37,6 +37,8 @@
 (require 'uniquify)
 (setq-default uniquify-buffer-name-style 'forward)
 
+(setq-default c-basic-offset 2)
+(setq c-default-style "stroustrup")
 
 ;;texing
 (defun ctex ()
