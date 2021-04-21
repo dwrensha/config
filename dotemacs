@@ -21,14 +21,11 @@
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/") t)
 
-;(require 'color-theme)
-;(color-theme-initialize)
-;(color-theme-solarized-dark)
-;(color-theme-high-contrast)
-
-;(setq theme-default 'color-theme-euphoria)
+(require 'color-theme-modern)
+(load-theme 'midnight t t)
+(enable-theme 'midnight)
 
 
 (set-face-attribute 'default nil :height 75)
