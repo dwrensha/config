@@ -30,8 +30,15 @@
 (load-theme 'midnight t t)
 (enable-theme 'midnight)
 
-
 (set-face-attribute 'default nil :height 75)
+
+(autoload 'rust-mode "rust-mode" nil t)
+(add-hook 'rust-mode-hook 'lsp-deferred)
+(add-hook 'rust-mode-hook
+          (lambda ()
+            ; this prevents auto-insertion of closing brackets
+            (setq lsp-enable-on-type-formatting nil)
+            ))
 
 (add-to-list 'load-path "~/src/capnproto/highlighting/emacs")
 (require 'capnp-mode)
